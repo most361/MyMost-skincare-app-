@@ -5,96 +5,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Beauty Clinic - Test de Piel</title>
+    <title>K-Beauty Expert - Análisis Integral</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        :root { --accent: #a68a64; --bg: #fdfaf6; --text: #3d3d3d; }
+        :root { --accent: #a68a64; --bg: #fdfaf6; --text: #3d3d3d; --warning: #d9534f; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h1 { color: var(--accent); text-align: center; font-weight: 300; letter-spacing: 2px; }
-        .description { text-align: center; font-size: 0.9em; color: #888; margin-bottom: 30px; }
-        
-        /* Estilos del Formulario */
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: inherit; }
-        textarea { height: 80px; }
-
-        button { width: 100%; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        .container { max-width: 650px; margin: auto; background: white; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h1 { color: var(--accent); text-align: center; font-weight: 300; letter-spacing: 2px; margin-top: 0; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .form-group { flex: 1; min-width: 200px; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.8em; text-transform: uppercase; color: #777; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 12px; font-size: 15px; box-sizing: border-box; background: #fff; font-family: inherit; }
+        button { width: 100%; padding: 16px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; margin-top: 10px; }
         .btn-submit { background-color: var(--accent); color: white; }
-        .btn-submit:hover { background-color: #7f5539; }
-
-        /* Tarjeta de Resultados */
-        #result-card { display: none; margin-top: 30px; padding: 20px; border: 2px solid #f4e4e1; border-radius: 15px; background: #fffcf9; }
-        .step { border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 15px; }
-        .btn-whatsapp { background-color: #25D366; color: white; text-decoration: none; display: block; text-align: center; padding: 15px; border-radius: 10px; margin-top: 10px; }
+        #result-card { display: none; margin-top: 30px; padding: 25px; border-radius: 20px; background: #fffcf9; border: 1.5px solid #e6ccb2; }
+        .step { border-left: 4px solid var(--accent); padding-left: 15px; margin-bottom: 15px; }
+        .warning-box { background: #fdf2f2; border: 1px solid var(--warning); padding: 10px; border-radius: 10px; font-size: 0.9em; color: var(--warning); margin-bottom: 15px; }
+        .btn-whatsapp { background-color: #25D366; color: white; text-decoration: none; display: block; text-align: center; padding: 15px; border-radius: 12px; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>K-BEAUTY CLINIC</h1>
-    <p class="description">Descubre tu rutina coreana ideal en 1 minuto</p>
+    <h1>K-BEAUTY LAB</h1>
+    <p style="text-align:center; font-size: 0.8em; color: #aaa; margin-bottom: 25px;">ANÁLISIS PROFESIONAL DE ESTILO DE VIDA</p>
 
-    <div id="quiz-container">
+    <div class="form-row">
         <div class="form-group">
-            <label>Nombre Completo:</label>
+            <label>Nombre</label>
             <input type="text" id="name" placeholder="Tu nombre...">
         </div>
-
         <div class="form-group">
-            <label>¿Cómo sientes tu piel?</label>
-            <select id="skin_type">
-                <option value="Grasa">Grasa (Brillo y poros abiertos)</option>
-                <option value="Seca">Seca (Tirantez y opacidad)</option>
-                <option value="Mixta">Mixta (Grasa solo en frente/nariz)</option>
-                <option value="Sensible">Sensible (Rojeces e irritación)</option>
-            </select>
+            <label>Edad</label>
+            <input type="number" id="age" placeholder="Años">
         </div>
-
-        <div class="form-group">
-            <label>Tu rutina actual (opcional):</label>
-            <textarea id="routine" placeholder="Ej: Jabón normal y crema hidratante..."></textarea>
-        </div>
-
-        <button class="btn-submit" onclick="calcular()">OBTENER MI DIAGNÓSTICO</button>
     </div>
 
+    <div class="form-row">
+        <div class="form-group">
+            <label>Clima Predominante</label>
+            <select id="climate">
+                <option value="Seco">Seco (Desértico o Frío seco)</option>
+                <option value="Húmedo">Húmedo (Tropical o Costa)</option>
+                <option value="Templado">Templado / Variable</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>¿Hábito de Fumar?</label>
+            <select id="smoker">
+                <option value="No">No fumo</option>
+                <option value="Si">Sí, fumo habitualmente</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Tipo de Piel y Objetivo</label>
+        <select id="skin_type">
+            <option value="Grasa">Grasa / Brillo</option>
+            <option value="Seca">Seca / Tirantez</option>
+            <option value="Mixta">Mixta</option>
+            <option value="Sensible">Sensible</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Preocupación Principal</label>
+        <select id="concern">
+            <option value="Acné / Grasitud">Acné / Grasitud</option>
+            <option value="Manchas / Opacidad">Manchas / Opacidad</option>
+            <option value="Arrugas / Flacidez">Arrugas / Flacidez</option>
+            <option value="Rojeces / Sensibilidad">Rojeces / Sensibilidad</option>
+        </select>
+    </div>
+
+    <button class="btn-submit" onclick="calcular()">OBTENER ESTUDIO COMPLETO</button>
+
     <div id="result-card">
-        <h2 style="color: var(--accent);">Tu Plan Personalizado</h2>
+        <h2 id="res-header" style="color:var(--accent); margin-top:0;"></h2>
+        <div id="warning-area"></div>
         <div id="output"></div>
-        <button style="background: #444; color: white;" onclick="descargarPDF()">Descargar Guía PDF</button>
-        <a id="wp-link" href="#" class="btn-whatsapp" target="_blank">Contactar Experta por WhatsApp</a>
+        <button style="background: #444; color: white;" onclick="descargarPDF()">DESCARGAR REPORTE</button>
+        <a id="wp-link" href="#" class="btn-whatsapp" target="_blank">ENVIAR A MI ASESORA</a>
     </div>
 </div>
 
 <script>
-    const configuracion = {
-        telefono: "393520570220", // <--- CAMBIA ESTO CON TU NÚMERO
-        activos: {
-            "Grasa": { rostro: "BHA y Árbol de Té", ojos: "Cafeína", labios: "Ceramidas" },
-            "Seca": { rostro: "Mucina de Caracol", ojos: "Péptidos", labios: "Miel" },
-            "Mixta": { rostro: "Niacinamida", ojos: "Ácido Hialurónico", labios: "Arroz" },
-            "Sensible": { rostro: "Centella Asiática", ojos: "Pantenol", labios: "Karité" }
-        }
+    const dbK = {
+        "Acné / Grasitud": { activo: "BHA + Centella", ojos: "Cafeína", labios: "Ceramidas" },
+        "Manchas / Opacidad": { activo: "Vitamina C + Arroz", ojos: "Niacinamida", labios: "Miel" },
+        "Arrugas / Flacidez": { activo: "Ginseng + Péptidos", ojos: "Adenosina", labios: "Colágeno" },
+        "Rojeces / Sensibilidad": { activo: "Cica + Artemisa", ojos: "Pantenol", labios: "Karité" }
     };
 
     function calcular() {
         const name = document.getElementById('name').value || "Cliente";
-        const type = document.getElementById('skin_type').value;
-        const info = configuracion.activos[type];
+        const smoker = document.getElementById('smoker').value;
+        const climate = document.getElementById('climate').value;
+        const concern = document.getElementById('concern').value;
+        const info = dbK[concern];
 
-        const htmlResult = `
-            <div class="step"><strong>Rostro:</strong> Usar ${info.rostro}</div>
-            <div class="step"><strong>Ojos:</strong> Usar ${info.ojos}</div>
-            <div class="step"><strong>Labios:</strong> Usar ${info.labios}</div>
+        document.getElementById('res-header').innerText = `Estudio de ${name}`;
+        
+        let warningHTML = "";
+        if(smoker === "Si") {
+            warningHTML = `<div class="warning-box"><strong>Nota de Experta:</strong> El tabaco acelera la oxidación. Te recomendamos duplicar el uso de antioxidantes (Vitamina C/E) para recuperar la luminosidad.</div>`;
+        }
+
+        const climaConsejo = climate === "Seco" ? "Debes usar cremas oclusivas." : "Prefiere texturas tipo gel.";
+
+        document.getElementById('warning-area').innerHTML = warningHTML;
+        document.getElementById('output').innerHTML = `
+            <div class="step"><strong>Clima:</strong> ${climate}. (${climaConsejo})</div>
+            <div class="step"><strong>Tratamiento Rostro:</strong> ${info.activo}</div>
+            <div class="step"><strong>Contorno de Ojos:</strong> ${info.ojos}</div>
+            <div class="step"><strong>Cuidado Labios:</strong> ${info.labios}</div>
         `;
 
-        document.getElementById('output').innerHTML = htmlResult;
-        
-        // Crear link WhatsApp
-        const msg = `Hola! Soy ${name}. Mi test K-Beauty: Piel ${type}. Activos: ${info.rostro}. ¿Qué productos tienes?`;
-        document.getElementById('wp-link').href = `https://wa.me/${configuracion.telefono}?text=${encodeURIComponent(msg)}`;
+        const msg = `Hola! Soy ${name}. Mi piel es de clima ${climate} y ${smoker === "Si" ? "fumo" : "no fumo"}. Quiero tratar ${concern}. ¿Qué me recomiendas?`;
+        document.getElementById('wp-link').href = `https://wa.me/521234567890?text=${encodeURIComponent(msg)}`;
 
         document.getElementById('result-card').style.display = 'block';
         window.scrollTo(0, document.body.scrollHeight);
@@ -104,19 +133,33 @@
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         const name = document.getElementById('name').value || "Cliente";
-        const type = document.getElementById('skin_type').value;
-        const info = configuracion.activos[type];
+        const smoker = document.getElementById('smoker').value;
+        const climate = document.getElementById('climate').value;
+        const concern = document.getElementById('concern').value;
+        const info = dbK[concern];
 
-        doc.setFontSize(20);
-        doc.text("K-BEAUTY CLINIC: REPORTE", 20, 20);
-        doc.setFontSize(12);
-        doc.text(`Cliente: ${name} | Tipo de Piel: ${type}`, 20, 40);
-        doc.text(`- Rostro: ${info.rostro}`, 20, 60);
-        doc.text(`- Ojos: ${info.ojos}`, 20, 70);
-        doc.text(`- Labios: ${info.labios}`, 20, 80);
-        doc.save(`Rutina_${name}.pdf`);
+        doc.setFont("helvetica", "bold");
+        doc.text("FICHA TÉCNICA SKINCARE PROFESIONAL", 20, 20);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Nombre: ${name} | Clima: ${climate} | Fumador: ${smoker}`, 20, 35);
+        doc.line(20, 40, 190, 40);
+
+        doc.text("RECOMENDACIÓN DE ACTIVOS:", 20, 55);
+        doc.text(`- Activo Principal: ${info.activo}`, 20, 65);
+        doc.text(`- Ojos: ${info.ojos}`, 20, 75);
+        doc.text(`- Labios: ${info.labios}`, 20, 85);
+        
+        if(smoker === "Si") {
+            doc.setTextColor(200, 0, 0);
+            doc.text("ALERTA: Se sugiere reforzar con antioxidantes por hábito de fumar.", 20, 105);
+        }
+
+        doc.save(`Ficha_KBeauty_${name}.pdf`);
     }
 </script>
-
 </body>
 </html>
+
+
+    
